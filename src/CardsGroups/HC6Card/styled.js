@@ -16,3 +16,7 @@ export const H6CardContainer = styled.div`
 export const Title = styled.div`
   font-weight: 500;
 `;
+
+export const IconSection = styled.img`
+  ${(props) => props.styles || ""}
+`;
