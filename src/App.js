@@ -158,7 +158,7 @@ function App() {
     }
     let changeY = pStart.y < pCurrent.y ? Math.abs(pStart.y - pCurrent.y) : 0;
     if (document.body.scrollTop === 0) {
-      if (changeY > 100) {
+      if (changeY > 300) {
         getHomePageInfo();
         loading();
       }
