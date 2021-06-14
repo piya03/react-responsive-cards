@@ -7,7 +7,6 @@ import { css } from "styled-components";
 
 const HC6Card = (props) => {
   const { cardData } = props;
-  console.log("🚀 ~ file: HC6Card.js ~ line 5 ~ profile_icon", profile_icon);
   const {
     description,
     formatted_description,
@@ -19,13 +18,11 @@ const HC6Card = (props) => {
   } = cardData;
   const resolvedIconObj = resolveBgImage(icon, profile_icon);
   const iconUrl = resolvedIconObj?.imageUrl;
-  console.log("🚀 ~ file: HC6Card.js ~ line 21 ~ HC6Card ~ iconUrl", iconUrl);
 
   const finalTitle = resolveFormattedText({
     formattedInfo: formatted_title,
     fallbackVal: title,
   });
-  console.log("🚀 ~ file: HC6Card.js ~ line 7 ~ HC6Card ~ props", cardData);
   const ImgRef = useRef(null);
   return (
     <H6CardContainer

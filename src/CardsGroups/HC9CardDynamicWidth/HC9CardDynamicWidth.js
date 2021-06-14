@@ -10,11 +10,6 @@ const HC9CardDynamicWidth = (props) => {
   const resolvedBgImageObj = resolveBgImage(bg_image);
   const bgUrl = resolvedBgImageObj?.imageUrl;
   const { height } = parentData;
-  console.log(
-    "🚀 ~ file: HC9CardDynamicWidth.js ~ line 11 ~ HC9CardDynamicWidth ~ bgUrl",
-    parentData,
-    cardData
-  );
 
   return (
     <H9CardContainer

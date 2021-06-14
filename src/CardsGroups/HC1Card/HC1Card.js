@@ -19,7 +19,6 @@ const HC1Card = (props) => {
   const resolvedIconObj = resolveBgImage(icon);
   const iconUrl = resolvedIconObj?.imageUrl;
 
-  console.log("🚀 ~ file: HC1Card.js ~ line 6 ~ HC1Card ~ props", cardData);
   return (
     <>
       <H1CardContainer
@@ -54,17 +53,6 @@ const HC1Card = (props) => {
           {finalTitle}
         </Title>
       </H1CardContainer>
-      {/* <H1RigthCard>
-        <div>
-          <div>
-            <img src={profile_icon} alt="" />
-          </div>
-          <div>
-            <div>Small display card</div>
-            <DisplayName>Arya Stark</DisplayName>
-          </div>
-        </div>
-      </H1RigthCard> */}
     </>
   );
 };

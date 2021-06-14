@@ -15,8 +15,16 @@
 //           },
 //           description: "Add some money to your account to get started.",
 //           formatted_description: {
-//             text: "Add some money to your account to get started.",
-//             entities: [],
+//             text: "Add some money to your {} to get {}.",
+//             entities: [
+//               {
+//                 text: "accountA",
+//                 color: "lightblue",
+//                 font_style: "italic",
+//                 url: "https://google.com",
+//               },
+//               "started",
+//             ],
 //           },
 //           url: "https://facebook.com/",
 //           bg_image: {

@@ -23,7 +23,16 @@ import {
 } from "../../utils";
 
 const HC3Card = (props) => {
-  const { cardData } = props;
+  const {
+    cardData,
+    parentData,
+    remindLaterList,
+    setRemindLaterList,
+    setDismissNowList,
+    dismissNowList,
+    cardIndex,
+  } = props;
+
   const {
     bg_color,
     bg_image,
@@ -64,12 +73,26 @@ const HC3Card = (props) => {
   const [showAnimation, setShowAnimation] = useState(true);
   function longPressFun(e) {
     setShowAnimation(!showAnimation);
-    console.log("longPressFunlongPressFun");
   }
 
   const touchduration = 1000;
   const timerRef = useRef(null);
 
+  function dismissNowFun(parentId, cardIndex) {
+    const newDismissList = [...dismissNowList, `${parentId}-${cardIndex}`];
+    setDismissNowList(newDismissList);
+    localStorage.setItem("dismisslist", JSON.stringify(newDismissList));
+  }
+
+  let lookUpValue = `${parentData.id}-${cardIndex}`;
+
+  let findCardIndexDismissed = dismissNowList.indexOf(lookUpValue);
+
+  let findCardIndexReminder = remindLaterList.indexOf(lookUpValue);
+  let notShowIndexReminder = findCardIndexReminder !== -1;
+  let notShowCardDismissed = findCardIndexDismissed !== -1;
+
+  if (notShowCardDismissed || notShowIndexReminder) return null;
   return (
     <HC3Container
       styles={css`
@@ -79,11 +102,22 @@ const HC3Card = (props) => {
       `}
     >
       <NotificationContainer>
-        <BellContainer onClick={() => setShowAnimation(true)}>
+        <BellContainer
+          onClick={() => {
+            setRemindLaterList([
+              ...remindLaterList,
+              `${parentData.id}-${cardIndex}`,
+            ]);
+          }}
+        >
           <img src={bell_icon} alt="" />
           <p>remind later</p>
         </BellContainer>
-        <DismisContainer>
+        <DismisContainer
+          onClick={() => {
+            dismissNowFun(parentData.id, cardIndex);
+          }}
+        >
           <img src={dismiss_icon} alt="" />
           <p>dismiss now</p>
         </DismisContainer>

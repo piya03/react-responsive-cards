@@ -1,3 +1,4 @@
+import React from "react";
 import { css } from "styled-components";
 
 //resolve bgImage
@@ -31,20 +32,49 @@ export function resolveFormattedText({ formattedInfo, fallbackVal }) {
 
     let arr = text.split("{}");
 
-    let newStr = "";
+    let newStr = [];
     let i = 0;
+
     while (i < arr.length && i < entities.length) {
-      newStr += `${arr[i]} ${entities[i]}`;
+      if (typeof entities[i] === "object") {
+        let finalContent = "";
+
+        const { url, color, font_style, text } = entities[i];
+
+        const styleObject = {
+          color: color || "initial",
+          fontStyle: font_style || "initial",
+          textDecoration: "none",
+        };
+        if (url) {
+          finalContent = (
+            <a
+              href={url}
+              style={styleObject}
+              target="_blank"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {text}
+            </a>
+          );
+        } else {
+          finalContent = <span style={styleObject}>{text}</span>;
+        }
+
+        newStr = [...newStr, <span>{arr[i]}</span>, finalContent];
+      } else {
+        newStr = [...newStr, <span>{arr[i]}</span>, <span>{entities[i]}</span>];
+      }
+
       i++;
     }
-    resolvedText = newStr;
+
+    resolvedText = newStr?.length
+      ? React.createElement("p", {}, ...(newStr || []))
+      : formattedInfo?.text;
   }
 
-  if (!resolvedText?.trim()) {
-    return fallbackVal;
-  }
-
-  return fallbackVal;
+  return resolvedText;
 }
 
 ///resolve cta
@@ -52,3 +82,5 @@ export function resolveCtaProperties({ ctaInfoObj }) {
   if (!ctaInfoObj) return null;
   return ctaInfoObj;
 }
+
+//swipe dowm fun

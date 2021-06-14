@@ -14,7 +14,6 @@ const HC5Card = (props) => {
   const resolvedBgImageObj = resolveBgImage(bg_image);
   const bgUrl = resolvedBgImageObj?.imageUrl;
 
-  console.log("🚀 ~ file: HC5Card.js ~ line 12 ~ HC5Card ~ props", cardData);
   return (
     <H5CardContainer
       onClick={() => {
